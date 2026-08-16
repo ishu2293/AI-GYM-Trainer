@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import time
 import pandas as pd
+from dotenv import load_dotenv
 from services.auth.login import render_login_wall
 from services.state.session_defaults import initial_session_defaults
 from services.config.workout_config import EXERCISE_OPTIONS
@@ -14,9 +15,11 @@ from services.persistence.exercise_repository import get_users_exercises
 from groq import Groq
 from services.coaching.llm import LLMCoach
 from services.coaching.tts import TextToSpeech
-from services.coaching.voice_pipeline import VoicePipeline, autoplay_audio
+from services.coaching.voice_pipeline import VoicePipeline, autoplay_audio, play_active_audio
 
 def main():
+    load_dotenv()
+
     st.set_page_config(
         page_icon="🏋🏻‍♂️",
         page_title="AI Real-Time GYM Coach",
@@ -38,14 +41,21 @@ def main():
         try:
             api_key = os.environ.get("GROQ_API_KEY", "")
 
-            if not api_key and hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets:
-                api_key = st.secrets["GROQ_API_KEY"]
+            if not api_key:
+                try:
+                    if "GROQ_API_KEY" in st.secrets:
+                        api_key = st.secrets["GROQ_API_KEY"]
+                except Exception:
+                    pass
+            if not api_key:
+                raise ValueError("GROQ_API_KEY is not set in .env or Streamlit secrets.")
             
             groq_client = Groq(api_key=api_key)
             llm_coach = LLMCoach(groq_client)
             tts = TextToSpeech()
             st.session_state.voice_pipeline = VoicePipeline(llm_coach, tts)
         except Exception as e:
+            st.warning(f"⚠️ Voice Pipeline disabled: {e}")
             st.session_state.voice_pipeline = None
 
     workout_started = st.session_state.get("workout_started", False)
@@ -167,6 +177,9 @@ def main():
 
     if st.session_state.get("audio_to_play"):
         autoplay_audio(st.session_state.audio_to_play)
+        st.session_state.audio_to_play = None
+    play_active_audio()
+
 
     if st.session_state.get("coach_feedback"):
         st.markdown("")

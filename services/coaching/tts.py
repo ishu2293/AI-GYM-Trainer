@@ -9,11 +9,12 @@ class TextToSpeech:
         if not cleaned:
             return
         
-        buffer = BytesIO()
-
-        gTTS(text=cleaned, lang=lang).write_to_fp(buffer)
-
-        buffer.seek(0)
-
-        return buffer.read()
+        try:
+            buffer = BytesIO()
+            gTTS(text=cleaned, lang=lang).write_to_fp(buffer)
+            buffer.seek(0)
+            return buffer.read()
+        except Exception as e:
+            print(f"[TTS Error] Failed to generate speech: {e}")
+            return None
     

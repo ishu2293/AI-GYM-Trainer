@@ -104,7 +104,9 @@ def sync_metrics_update(context):
         if result:
             st.session_state.audio_to_play, st.session_state.coach_feedback = result
 
-    if st.session_state.get("voice_pipeline"):
+    audio_playing = time.time() < st.session_state.get("audio_expires_at", 0)
+
+    if not audio_playing and st.session_state.get("voice_pipeline"):
         result = st.session_state.voice_pipeline.process_event(
             event="ongoing_form_check",
             exercise=exercise,

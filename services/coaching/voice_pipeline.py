@@ -1,6 +1,8 @@
 import time
 import streamlit as st
-
+import base64
+import uuid
+import streamlit.components.v1 as components
 
 class VoicePipeline:
     def __init__(self, llm, tts):
@@ -85,10 +87,20 @@ class VoicePipeline:
         return voice, text
     
 
-def autoplay_audio(audio_bytes):
+def autoplay_audio(audio_bytes, duration_seconds=4.5):
     if not audio_bytes:
         return
     
-    st.markdown("<style>[data-testid='stAudio'] {display: none;}</style>", unsafe_allow_html=True)
+    b64 = base64.b64encode(audio_bytes).decode()
+    st.session_state.current_audio_html = f'<audio autoplay style="display:none;" src="data:audio/mp3;base64,{b64}"></audio>'
+    st.session_state.audio_expires_at = time.time() + duration_seconds
+
+
+def play_active_audio():
+    now = time.time()
+    audio_expires = st.session_state.get("audio_expires_at", 0)
     
-    st.audio(audio_bytes, format="audio/mp3", autoplay=True)
+    if now < audio_expires and st.session_state.get("current_audio_html"):
+        st.markdown(st.session_state.current_audio_html, unsafe_allow_html=True)
+    else:
+        st.session_state.current_audio_html = None
