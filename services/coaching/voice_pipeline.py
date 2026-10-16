@@ -1,8 +1,6 @@
 import time
 import streamlit as st
 import base64
-import uuid
-import streamlit.components.v1 as components
 
 class VoicePipeline:
     def __init__(self, llm, tts):
