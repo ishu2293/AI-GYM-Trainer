@@ -16,6 +16,8 @@ from groq import Groq
 from services.coaching.llm import LLMCoach
 from services.coaching.tts import TextToSpeech
 from services.coaching.voice_pipeline import VoicePipeline, autoplay_audio, play_active_audio
+from dashboard import show_dashboard
+from services.coaching.fitness_planner import render_fitness_planner
 
 def main():
     load_dotenv()
@@ -67,6 +69,13 @@ def main():
             st.caption(f"👤Login as {st.session_state.username}")
 
         st.divider()
+
+        page = st.radio(
+            "Navigation",
+            ["Workout", "Progress Dashboard", "AI Planner"],
+            key="app_navigation"
+        )
+
         st.subheader("Workout Plan")
 
         if not workout_started:
@@ -171,6 +180,22 @@ def main():
                 st.metric("Front Knee Angle", f"{st.session_state.front_knee_angle}°")
                 st.metric("Torso Angle", f"{st.session_state.torso_angle}°")
                 st.metric("Balance Status", st.session_state.balance_status)
+
+    
+    if page == "AI Planner":
+        voice_pipeline = st.session_state.get("voice_pipeline")
+        planner_llm = voice_pipeline.llm if voice_pipeline else None
+
+        render_fitness_planner(
+            user_id=st.session_state["user_id"],
+            llm_coach=planner_llm,
+        )
+        return
+
+    if page == "Progress Dashboard":
+        show_dashboard(st.session_state["user_id"])
+        return
+
 
     st.title("AI Real-Time GYM Coach")
     st.markdown("### Real-time pose detection with proactive AI voice coaching")

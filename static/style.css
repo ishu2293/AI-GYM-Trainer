@@ -1,10 +1,15 @@
 /* =========================================================
-   GLOBAL THEME
+   GLOBAL THEME & ROOT SCALING
 ========================================================= */
+
+html {
+  font-size: 18px; /* Scales all rem-based units up for larger overall text */
+}
 
 .stApp {
   background-color: #0A0D14;
   color: #fff;
+  font-size: 1.15rem;
 }
 
 [data-testid="stSidebar"] {
@@ -12,12 +17,54 @@
 }
 
 /* =========================================================
-   TYPOGRAPHY (SCOPED – safer)
+   TYPOGRAPHY
 ========================================================= */
 
 .block-container,
-.block-container * {
+.block-container *,
+[data-testid="stSidebar"],
+[data-testid="stSidebar"] * {
   font-family: 'AdobeClean', sans-serif !important;
+}
+
+/* General text, paragraphs, lists, and labels */
+p,
+span,
+label,
+li,
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li,
+[data-testid="stText"] {
+  font-size: 1.15rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Headings */
+h1, [data-testid="stHeadingWithActionElements"] h1 {
+  font-size: 2.4rem !important;
+  font-weight: 700 !important;
+}
+
+h2, [data-testid="stHeadingWithActionElements"] h2 {
+  font-size: 1.9rem !important;
+  font-weight: 600 !important;
+}
+
+h3, [data-testid="stHeadingWithActionElements"] h3 {
+  font-size: 1.55rem !important;
+  font-weight: 600 !important;
+}
+
+h4, [data-testid="stHeadingWithActionElements"] h4 {
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+}
+
+/* Captions and subtext */
+[data-testid="stCaptionContainer"] p,
+small {
+  font-size: 1.05rem !important;
+  opacity: 0.8;
 }
 
 /* =========================================================
@@ -26,7 +73,26 @@
 
 .block-container {
   padding: 50px 3rem !important;
-  max-width: 750px !important;
+  max-width: 900px !important;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] .stRadio label,
+[data-testid="stSidebar"] div[role="radiogroup"] label {
+  font-size: 1.15rem !important;
+}
+
+[data-testid="stSidebar"] h1 {
+  font-size: 2.1rem !important;
+}
+
+[data-testid="stSidebar"] h3 {
+  font-size: 1.45rem !important;
 }
 
 /* =========================================================
@@ -41,6 +107,9 @@ button,
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 0 !important;
   font-family: 'AdobeClean', sans-serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 500 !important;
+  padding: 0.6rem 1.2rem !important;
 }
 
 /* =========================================================
@@ -49,15 +118,16 @@ button,
 
 input,
 textarea,
-p,
-li,
 code,
 [data-testid="stSelectbox"] > div > div,
 [data-baseweb="select"] > div,
 [data-baseweb="popover"] ul,
-[data-baseweb="menu"] {
+[data-baseweb="menu"],
+.stTextInput input,
+.stNumberInput input {
   border-radius: 0 !important;
   font-family: 'AdobeClean', sans-serif !important;
+  font-size: 1.15rem !important;
 }
 
 /* =========================================================
@@ -67,7 +137,7 @@ code,
 [data-testid="stMetric"] {
   background-color: #181D2A;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1rem 1.2rem;
+  padding: 1.2rem 1.4rem;
   border-radius: 0;
 }
 
@@ -78,17 +148,17 @@ code,
 }
 
 [data-testid="stMetricValue"] {
-  font-size: 1.5rem !important;
-  font-weight: 400 !important;
+  font-size: 2.2rem !important;
+  font-weight: 600 !important;
 }
 
 [data-testid="stMetricLabel"] {
-  font-size: 15px !important;
-  opacity: 0.6;
+  font-size: 1.15rem !important;
+  opacity: 0.85;
 }
 
 [data-testid="stMetric"] div label p {
-  font-size: 16px !important;
+  font-size: 1.15rem !important;
 }
 
 /* =========================================================
@@ -126,14 +196,17 @@ div[role="menuitem"] {
 }
 
 /* =========================================================
-   DATAFRAME FIX
+   DATAFRAME & TABLE FIX
 ========================================================= */
 
 .stDataFrame,
 .stDataFrame div,
-.stDataFrameGlideDataEditor {
+.stDataFrameGlideDataEditor,
+.stTable,
+table {
   border-radius: 0 !important;
   font-family: 'AdobeClean', sans-serif !important;
+  font-size: 1.1rem !important;
 }
 
 /* =========================================================
@@ -162,11 +235,18 @@ div[role="menuitem"] {
 }
 
 /* =========================================================
-   MARKDOWN
+   MARKDOWN & ALERTS
 ========================================================= */
 
 [data-testid="stMarkdownContainer"] strong {
   font-family: 'AdobeClean', sans-serif !important;
+}
+
+[data-testid="stAlertContainer"] p,
+[data-testid="stAlertContentInfo"] p,
+[data-testid="stAlertContentSuccess"] p,
+[data-testid="stAlertContentError"] p {
+  font-size: 1.15rem !important;
 }
 
 /* =========================================================
