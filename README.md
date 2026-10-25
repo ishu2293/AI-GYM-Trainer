@@ -1,5 +1,7 @@
 # AI Real-Time GYM Trainer
 
+Try it out: [https://ai-gym-trainer-ishwari.streamlit.app/](https://ai-gym-trainer-ishwari.streamlit.app/)
+
 An AI-powered real-time workout coach and fitness assistant that uses computer vision, pose estimation, Large Language Models, and Text-to-Speech to analyze exercises, provide live audio coaching, track workout progress, and generate personalized diet and fitness plans.
 
 The application captures webcam input to detect body posture in real time, counts repetitions, flags incorrect form, delivers proactive voice coaching, visualizes workout consistency on an interactive dashboard, and creates tailored workout and meal plans.
@@ -23,13 +25,13 @@ The application captures webcam input to detect body posture in real time, count
 
 ## Supported Exercises
 
-| Exercise | Form Analysis | Rep Counting | Tracked Metrics |
-|----------|---------------|--------------|-----------------|
-| **Squats** | Yes | Yes | Knee Angle, Back Angle, Depth Status |
-| **Push-ups** | Yes | Yes | Elbow Angle, Body Alignment, Hip Status |
-| **Biceps Curls** | Yes | Yes | Elbow Angle, Shoulder Stability, Torso Swing |
-| **Shoulder Press** | Yes | Yes | Elbow Angle, Arm Extension, Back Arch |
-| **Lunges** | Yes | Yes | Front Knee Angle, Torso Angle, Balance Status |
+| Exercise | Form Analysis and Rep Counting | Tracked Metrics |
+|----------|--------------------------------|-----------------|
+| **Squats** | Yes | Knee Angle, Back Angle, Depth Status |
+| **Push-ups** | Yes | Elbow Angle, Body Alignment, Hip Status |
+| **Biceps Curls** | Yes | Elbow Angle, Shoulder Stability, Torso Swing |
+| **Shoulder Press** | Yes | Elbow Angle, Arm Extension, Back Arch |
+| **Lunges** | Yes | Front Knee Angle, Torso Angle, Balance Status |
 
 ---
 
