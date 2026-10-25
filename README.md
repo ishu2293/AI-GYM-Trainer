@@ -23,13 +23,13 @@ The application captures webcam input to detect body posture in real time, count
 
 ## Supported Exercises
 
-| Exercise | Form Analysis | Rep Counting | Tracked Metrics |
-|----------|---------------|--------------|-----------------|
-| **Squats** | Yes | Yes | Knee Angle, Back Angle, Depth Status |
-| **Push-ups** | Yes | Yes | Elbow Angle, Body Alignment, Hip Status |
-| **Biceps Curls** | Yes | Yes | Elbow Angle, Shoulder Stability, Torso Swing |
-| **Shoulder Press** | Yes | Yes | Elbow Angle, Arm Extension, Back Arch |
-| **Lunges** | Yes | Yes | Front Knee Angle, Torso Angle, Balance Status |
+| Exercise | Form Analysis and Rep Counting | Tracked Metrics |
+|----------|--------------------------------|-----------------|
+| **Squats** | Yes | Knee Angle, Back Angle, Depth Status |
+| **Push-ups** | Yes | Elbow Angle, Body Alignment, Hip Status |
+| **Biceps Curls** | Yes | Elbow Angle, Shoulder Stability, Torso Swing |
+| **Shoulder Press** | Yes | Elbow Angle, Arm Extension, Back Arch |
+| **Lunges** | Yes | Front Knee Angle, Torso Angle, Balance Status |
 
 ---
 
