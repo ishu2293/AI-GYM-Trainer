@@ -1,5 +1,7 @@
 # AI Real-Time GYM Trainer
 
+Try it out: [https://ai-gym-trainer-ishwari.streamlit.app/](https://ai-gym-trainer-ishwari.streamlit.app/)
+
 An AI-powered real-time workout coach and fitness assistant that uses computer vision, pose estimation, Large Language Models, and Text-to-Speech to analyze exercises, provide live audio coaching, track workout progress, and generate personalized diet and fitness plans.
 
 The application captures webcam input to detect body posture in real time, counts repetitions, flags incorrect form, delivers proactive voice coaching, visualizes workout consistency on an interactive dashboard, and creates tailored workout and meal plans.
