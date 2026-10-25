@@ -235,45 +235,6 @@ The application provides three primary modules accessible from the sidebar navig
 
 ---
 
-## Exercise Metrics & Analysis
-
-### Squats
-- **Tracked Joints**: Hip, Knee, Ankle
-- **Metrics**: Knee Angle, Back Angle, Depth Status (`GOOD`, `TOO HIGH`)
-- **Common Feedback**: "Your squat is not deep enough", "Avoid leaning too far forward"
-
-### Push-ups
-- **Tracked Joints**: Shoulder, Elbow, Wrist, Hip, Ankle
-- **Metrics**: Elbow Angle, Body Alignment, Hip Status (`NORMAL`, `SAGGING`, `PIKED UP`)
-- **Common Feedback**: "Keep your body in a straight line", "Do not let your hips sag"
-
-### Biceps Curls
-- **Tracked Joints**: Shoulder, Elbow, Wrist, Hip
-- **Metrics**: Elbow Angle, Shoulder Stability, Torso Swing (`STABLE`, `SWINGING`)
-- **Common Feedback**: "Keep your elbows pinned to your sides", "Avoid swinging your torso"
-
-### Shoulder Press
-- **Tracked Joints**: Shoulder, Elbow, Wrist, Hip
-- **Metrics**: Elbow Angle, Arm Extension (`FULL`, `PARTIAL`), Back Arch (`Normal`, `Slight Arch`, `Excessive Arch`)
-- **Common Feedback**: "Lock out at the top", "Keep your core tight and avoid arching your lower back"
-
-### Lunges
-- **Tracked Joints**: Hip, Knee, Ankle
-- **Metrics**: Front Knee Angle, Torso Angle, Balance Status (`GOOD`, `OFF BALANCE`)
-- **Common Feedback**: "Keep your front knee aligned over your ankle", "Maintain an upright torso"
-
----
-
-## Database Schema
-
-The SQLite database (`data.db`) consists of three tables:
-
-1. **`users`**: User authentication credentials and profile identifiers.
-2. **`exercises`**: Logged workout sessions (`user_id`, `exercise_name`, `reps`, `sets`, `time`, `created_at`).
-3. **`fitness_plans`**: Saved AI-generated fitness profiles and plans (`user_id`, `profile_json`, `plan_text`, `updated_at`).
-
----
-
 ## Author
 
 **Ishwari Daphal**  
