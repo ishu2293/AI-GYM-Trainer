@@ -2,51 +2,17 @@ name: Keep Streamlit App Awake
 
 on:
   schedule:
-    # Runs every 12 hours (at 00:00 and 12:00 UTC)
-    - cron: '0 0,12 * * *'
+    # Runs every 4 hours to stay well under Streamlit's sleep threshold
+    - cron: '0 */4 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 jobs:
   keep-awake:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Wake up Streamlit app
+        uses: gpenessot/streamlit-keep-alive@v1
         with:
-          python-version: '3.10'
-
-      - name: Install Playwright and browser dependencies
-        run: |
-          pip install playwright
-          playwright install --with-deps chromium
-
-      - name: Ping and Wake Up App
-        run: |
-          python -c "
-          from playwright.sync_api import sync_playwright
-          import time
-
-          url = 'https://ai-gym-trainer-ishwari.streamlit.app/'
-          print(f'Visiting {url}...')
-
-          with sync_playwright() as p:
-              browser = p.chromium.launch(headless=True)
-              page = browser.new_page()
-              try:
-                  page.goto(url, timeout=60000, wait_until='domcontentloaded')
-                  time.sleep(8)
-
-                  # Look for the wake-up button if the app is asleep
-                  wake_btn = page.locator('button:has-text(\"get this app back up\"), button:has-text(\"Wake up\")')
-                  if wake_btn.count() > 0:
-                      print('App was sleeping! Clicking wake-up button...')
-                      wake_btn.first.click()
-                      time.sleep(15)
-                      print('Wake-up initiated successfully!')
-                  else:
-                      print('App is already active. Inactivity timer reset!')
-              except Exception as e:
-                  print(f'Encountered error: {e}')
-              finally:
-                  browser.close()
-          "
+          app-urls: |
+            https://ai-gym-trainer-ishwari.streamlit.app/
+          timeout: 120
