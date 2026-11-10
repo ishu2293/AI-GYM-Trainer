@@ -3,7 +3,7 @@ name: Keep Streamlit App Awake
 
 on:
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,11 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Wake up Streamlit app
+      - name: Ping Streamlit app
         run: |
-          echo "Pinging AI Gym Trainer..."
-          curl -L --retry 3 --retry-delay 10 \
+          URL="https://ai-gym-trainer-ishwari.streamlit.app/"
+
+          STATUS=$(curl -sS -L \
+            --max-redirs 10 \
             --max-time 120 \
-            --fail \
-            https://ai-gym-trainer-ishwari.streamlit.app/
-          echo "Ping completed successfully!"
+            -o /dev/null \
+            -w "%{http_code}" \
+            "$URL") || true
+
+          echo "HTTP Status: $STATUS"
