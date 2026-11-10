@@ -1,25 +1,22 @@
 
-name: Keep Streamlit App Awake
+name: Diagnose Streamlit App
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
-  keep-awake:
+  check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ping Streamlit app
+      - name: Inspect redirect
         run: |
           URL="https://ai-gym-trainer-ishwari.streamlit.app/"
 
-          STATUS=$(curl -sS -L \
-            --max-redirs 10 \
-            --max-time 120 \
-            -o /dev/null \
-            -w "%{http_code}" \
-            "$URL") || true
+          echo "Checking initial response..."
 
-          echo "HTTP Status: $STATUS"
+          curl -sS \
+            --max-time 30 \
+            -D - \
+            -o /dev/null \
+            "$URL"
